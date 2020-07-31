@@ -9,7 +9,8 @@ class App extends Component {
       {name:'Kartik', age:22},
       {name:'Parth', age:2},
       {name:'Steve', age:222},
-    ]
+    ] ,
+    showPersons : false,
   }
 
   switchNameHandler = (newName) => {
@@ -36,6 +37,12 @@ class App extends Component {
     );
   }
 
+  togglePersonHandler = () => {
+      this.setState({
+        showPersons: !this.state.showPersons
+      });
+  } 
+
   render() {
     const style = {
       backgroudColor: 'white',
@@ -44,23 +51,36 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     };
-    return (
-      <div className="App">
-        <h1>Wassup</h1>
-        <button style={style} onClick={()=>this.switchNameHandler("Max")}>Switch Name</button>
+
+    let persons = null;
+
+    if(this.state.showPersons)
+    {
+      persons = (
+        <div>
         <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} />
+         name={this.state.persons[0].name} 
+         age={this.state.persons[0].age} />
         <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          change = {this.nameChangedHandler}
+         name={this.state.persons[1].name} 
+         age={this.state.persons[1].age}
+         change = {this.nameChangedHandler}
           click={this.switchNameHandler.bind(this,"Max!")}> 
           My Hobbies: Lel
         </Person>
         <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age}/>
+         name={this.state.persons[2].name} 
+         age={this.state.persons[2].age}/>
+      </div>
+      );
+    }
+    
+    return (
+      <div className="App">
+        <h1>Wassup</h1>
+        <button style={style} onClick={this.togglePersonHandler}>Toggle Persons</button>
+
+        {persons}
       </div>
     );
   }
