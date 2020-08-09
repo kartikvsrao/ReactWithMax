@@ -62,8 +62,6 @@ class App extends Component {
     this.setState({persons:persons});
   }
 
-
-
   componentDidMount () {
     console.log("[App.js] Component Mounted");
   }
